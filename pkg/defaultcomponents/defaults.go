@@ -24,6 +24,7 @@ import (
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/newrelicexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/sapmexporter"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/exporter/signalfxexporter"
+	"github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awsecscontainermetricsreceiver"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awsxrayreceiver"
@@ -41,10 +42,24 @@ import (
 
 // Components register OTel components for aws-otel-collector distribution
 func Components() (component.Factories, error) {
-	errs := []error{}
+	var errs []error
 	factories, err := defaultcomponents.Components()
 	if err != nil {
 		return component.Factories{}, err
+	}
+
+	// enable extensions
+	extensions := []component.ExtensionFactory{
+		ecsobserver.NewFactory(),
+	}
+
+	for _, ext := range factories.Extensions {
+		extensions = append(extensions, ext)
+	}
+
+	factories.Extensions, err = component.MakeExtensionFactoryMap(extensions...)
+	if err != nil {
+		errs = append(errs, err)
 	}
 
 	// enable the selected receivers

@@ -11,6 +11,8 @@ require (
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/newrelicexporter v0.19.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/sapmexporter v0.19.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/signalfxexporter v0.19.0
+	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer v0.0.0-00010101000000-000000000000
+	github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver v0.0.0-00010101000000-000000000000
 	github.com/open-telemetry/opentelemetry-collector-contrib/processor/metricstransformprocessor v0.19.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awsecscontainermetricsreceiver v0.18.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/awsxrayreceiver v0.19.0
@@ -34,3 +36,7 @@ replace github.com/aws-observability/aws-otel-collector/pkg/lambdacomponents => 
 replace github.com/open-telemetry/opentelemetry-collector-contrib/internal/common => github.com/open-telemetry/opentelemetry-collector-contrib/internal/common v0.19.0
 
 replace github.com/open-telemetry/opentelemetry-collector-contrib/pkg/batchperresourceattr => github.com/open-telemetry/opentelemetry-collector-contrib/pkg/batchperresourceattr v0.19.0
+
+replace github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer => ../../open-telemetry/opentelemetry-collector-contrib/extension/observer
+
+replace github.com/open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver => ../../open-telemetry/opentelemetry-collector-contrib/extension/observer/ecsobserver
